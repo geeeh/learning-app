@@ -1,0 +1,299 @@
+.nav-brand {
+    font-family: cursive;
+    color: #D80027 !important;
+    /*color: #FF7400 !important;*/
+}
+
+p, .more-info, a, h1, h2, h3, h4, h5, h6, button {
+    font-family: 'Enriqueta', serif;
+}
+
+.btn-outline-secondary {
+    padding: 7px 25px !important;
+}
+
+.get-started {
+    width: 150px;
+    display: block;
+    font-size: 19px;
+    padding: 7px 25px;
+    margin-top: 30px;
+    border: 1px solid #009999;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #009999;
+}
+
+.get-started:hover {
+    text-decoration: none;
+    color: #39AECF;
+    border-color: #39AECF;
+}
+
+.landing-page {
+    width: 100%;
+    height: calc(100vh - 57px);
+}
+
+.landing-page .main-img img {
+    width: 90%;
+    height: auto;
+    margin: 20% auto ;
+    overflow: hidden;
+    opacity: 0.9;
+    z-index:1000;
+}
+.landing-page .main-img {
+    overflow: hidden;
+}
+
+.landing-page .info {
+    width: 50%;
+    text-align: left;
+    margin: 50% auto 0 auto;
+}
+
+.info p {
+    color: #636363;
+}
+
+.info h4 {
+    font-family: 'Galada', cursive;
+    font-size: 35px;
+    color: #009999;
+}
+
+.login-page{
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to right, #009999 , #057D9F, #39AECF);
+    padding-top: 15%;
+}
+.login-space {
+    width: 800px;
+    height: 500px;
+    background: #FFFFFF;
+    margin: 0 auto;
+    font-family: 'Enriqueta', serif;
+    box-shadow: 0px 4px 8px 1px rgba(0,0,0,0.3);
+}
+
+.btn {
+    border-radius: 2px;
+}
+
+.login-space h4 {
+    text-align: center;
+    font-family: 'Galada', cursive;
+}
+
+.login-space .google-login{
+    margin: 40px 100px;
+    text-align: center;
+    border-color: #D80027;
+    color: #D80027;
+}
+
+.login-space .google-login:hover {
+    background: #F3F3F3;
+}
+
+.background-image {
+    width: 700px;
+    height: 500px;
+}
+
+.login-space .back{
+    overflow: hidden;
+}
+.login-space form {
+    margin: 20px 50px;
+}
+
+.login-space input {
+    border: none;
+    border-radius: 0;
+    border-bottom: 0.5px solid #C3C3C3;
+    width: 250px;
+    padding-left: 0;
+}
+
+.or {
+    text-align: center;
+}
+
+.button-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.sign-in {
+    padding: 5px 20px;
+    color: #39AECF;
+    border-color: #39AECF;
+    margin-bottom: 20px;
+}
+
+.sign-in-space {
+    padding: 20px;
+}
+
+.sign-up-space .reg_head {
+    margin-bottom: 80px !important;
+}
+
+.sidebar {
+    position: fixed;
+    min-width: 70px;
+    max-width: 80px;
+    background: #f8f8f8;
+    margin-top: 70px;
+    box-shadow: 0px 4px 8px 1px rgba(0,0,0,0.3);
+}
+
+.sidebar ul li {
+    padding: 20px
+}
+
+.sidebar ul li a img {
+    width: 25px;
+    height: 25px;
+}
+
+.dash-heading{
+    font-family: cursive;
+    color: #D80027 !important;
+    z-index: 1000;
+}
+
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar ul a {
+    margin-left: -40px !important;
+}
+
+.sidebar ul a:hover{
+    text-decoration: none;
+}
+
+.login-page .show-warning {
+    padding-top: 20px !important;
+}
+
+.categories {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 100px 150px;
+    height: 100vh;
+}
+
+.categories label {
+    padding: 7px 14px;
+    line-height: 190%;
+    outline-style: none;
+    transition: all .6s;
+    background: #f3f3f3;
+    margin-right: 20px;
+}
+.categories .hiddenCB {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.categories .hiddenCB div {
+    width: 700px;
+    margin: 20px auto;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.categories .hiddenCB input[type="checkbox"],
+.categories .hiddenCB input[type="radio"] {
+    display: none;
+}
+
+.categories .hiddenCB label {
+    cursor: pointer;
+}
+
+.categories .hiddenCB input[type="checkbox"]+label {
+    width: 150px;
+    background: #FFFFFF;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+.categories .hiddenCB input[type="checkbox"]+label:hover{
+    background: rgba(0, 128, 128, .8);
+}
+
+.categories .hiddenCB input[type="checkbox"]:checked+label {
+    background: rgba(0, 128, 128, .4);
+}
+
+.categories .hiddenCB input[type="checkbox"]:checked+label:hover{
+    background: rgba(0, 128, 128, 0.7);
+}
+
+.topics {
+    position: absolute;
+    width: 50%;
+    top: 0;
+    left: 0;
+    margin: 0 auto 20px auto;
+    height: 100vh;
+    margin: 100px 150px;
+    text-align: left;
+}
+
+.topics .topic-item {
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto 20px auto;
+    box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.3);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.topics .topic-item .info {
+    padding: 20px
+}
+
+.topics .topic-item .info h4{
+    font-size: 18px;
+}
+
+.topics .topic-item img {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.navbar a img {
+    margin: 10px;
+}
+
+.navbar a,
+.navbar a:hover {
+    text-decoration: none;
+    color: #009EFD;
+}
+
+.topics .topic-item .info a:hover{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.topics .topic-item .info button:hover {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.topics .topic-item .info a{
+    color: #F43B00;
+}
