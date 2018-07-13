@@ -17,7 +17,10 @@ class BaseController < Sinatra::Base
     set :session_secret, '@31412drsvsgt!sdasdnjf34vb'
   end
 
-  landing = -> do; end
+  # Homepage
+  landing = lambda do
+    haml :index
+  end
 
   get_dashboard = lambda do
     if session[:id]

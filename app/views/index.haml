@@ -1,0 +1,40 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  %a.navbar-brand.nav-brand{:href => "#"} Micro-Learning
+  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    %ul.navbar-nav.ml-auto
+      %li.nav-item
+        %a.nav-link.btn.btn-outline-secondary{:href => "/register"} sign up
+
+.landing-page
+  .row
+    .col-sm-6
+      .info
+        %h4 Do not get left behind.
+        %p Start learning something new each day with our Micro-Learning-Application. Get a daily digest from our application depending on your preferences.
+        %a.get-started{:href => "#sign-in"} Get Started
+    .col-sm-6.main-img
+      %img{:src=> "imgs/main.png" }
+
+.login-page#sign-in
+  .login-space
+    .row
+      .col-sm-6.back
+        %img.background-image{:src=>"imgs/background.jpg"}
+      .col-sm-6.sign-in-space
+        %h4 login
+        %button.btn.btn-outline-secondary.google-login{:type=>"button"}
+          %img.button-icon{:src=>"imgs/google.svg"} Google login
+        %p.or or
+        %form{:action => "/login", :method => "post", :role => "form"}
+          .form-group
+            %input#exampleInputEmail1.form-control{"aria-describedby" => "emailHelp", :name => "email", :placeholder => "Enter email", :type => "email"}/
+          .form-group
+            %input#exampleInputPassword1.form-control{:placeholder => "Password", :name => "password", :type => "password"}/
+          %button.btn.btn-outline-primary.sign-in{:type => "submit"} Sign in
+          - if flash[:notice]
+            .form-group{class: "show-warning"}
+              %div{class: "alert alert-warning", "data-alert" => ""}
+                = flash[:notice]
+                %a.close{href: "#"} ×

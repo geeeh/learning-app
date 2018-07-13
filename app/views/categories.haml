@@ -1,0 +1,19 @@
+= haml :dashboard
+.categories{:style=> "position: absolute"}
+  .hiddenCB
+    %div
+      %h5 User Categories
+      -if @user_categories
+        %form{:action => "/categories/add", :method => "post", :role => "form"}
+          - @user_categories.each do |element|
+            %input{:id => "#{element['name']}", :name => "choice[]", :type => "checkbox", :value =>"#{element['id']}"}/
+            %label{:for => "#{element['name']}"} #{element['name']}
+  .hiddenCB
+    %div
+      %h5 All Categories
+      -if @categories
+        %form{:action => "/categories/add", :method => "post", :role => "form"}
+          - @categories.each do |element|
+            %input{:id => "#{element['name']}", :name => "choice[]", :type => "checkbox", :value =>"#{element['id']}"}/
+            %label{:for => "#{element['name']}"} #{element['name']}
+          %button.btn.btn-primary{:type => "submit"} Submit  
