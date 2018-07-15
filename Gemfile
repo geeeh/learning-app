@@ -17,4 +17,6 @@ group :test do
   gem 'rack-test'
   gem 'rake'
   gem 'rspec'
+  gem 'database_cleaner'
+  gem 'simplecov'
 end
