@@ -1,2 +1,5 @@
 language: ruby
-rvm: 2.5.1p57
+rvm:
+ - 2.5.1p
+ - jruby
+ - rbx-3
