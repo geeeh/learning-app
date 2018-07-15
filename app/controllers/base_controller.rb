@@ -9,8 +9,10 @@ require './config/environments'
 # Base controller for all other controllers.
 class BaseController < Sinatra::Base
   register Sinatra::Flash
+  env_choice = ENV['RACK_ENV'] || 'development'
 
   configure do
+    set :environment, env_choice
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
