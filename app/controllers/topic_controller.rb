@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 require 'news-api'
+require 'pony'
 
 # class TopicController
 class TopicController < BaseController
   newsapi = News.new('802e4f6a5477493d9975957c95dfe76f')
 
-  def fetch_categories
+  def get_user_choices_by_id(user_id)
     choices = []
-    @user = User.find_by(id: session[:id])
+    @user = User.find_by(id: user_id)
     @user.subjects.all.each do |item|
       choices << item.name
     end
@@ -16,9 +17,24 @@ class TopicController < BaseController
   end
 
   get_topics = lambda do
-    query_topics = fetch_categories.join(', ')
-    @articles = newsapi.get_everything(q: query_topics, sources: 'bbc-news,the-verge', domains: 'bbc.co.uk,techcrunch.com', language: 'en',  page: 2)
+    choices = get_user_choices_by_id session[:id]
+    query_topics = choices.join(', ')
+    @articles = newsapi.get_everything(q: query_topics,
+                                       sources: 'bbc-news,the-verge',
+                                       domains: 'bbc.co.uk,techcrunch.com',
+                                       language: 'en',
+                                       page: 2)
     haml :topics
+  end
+
+  def send_emails(user_id)
+    choices = get_user_choices_by_id user_id
+    query_topics = choices.join(', ')
+    @articles = newsapi.get_everything(q: query_topics, sources: 'bbc-news,the-verge', domains: 'bbc.co.uk,techcrunch.com', language: 'en', page: 1)
+    Pony.mail(to: 'godwingitonga89@gmail.com',
+              from: 'dev.godwin.gitonga@gmail.com',
+              subject: 'Daily topics',
+              body: render_to_string('./app/views/email.haml', locals: { articles: @articles }, layout: true))
   end
 
   get '/topics', &get_topics
