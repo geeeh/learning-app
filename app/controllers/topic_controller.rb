@@ -7,7 +7,7 @@ require 'pony'
 class TopicController < BaseController
   newsapi = News.new('802e4f6a5477493d9975957c95dfe76f')
 
-  def get_user_choices_by_id(user_id)
+  def fetch_user_choices_by_id(user_id)
     choices = []
     @user = User.find_by(id: user_id)
     @user.subjects.all.each do |item|
@@ -17,7 +17,12 @@ class TopicController < BaseController
   end
 
   get_topics = lambda do
-    choices = get_user_choices_by_id session[:id]
+    puts session[:id]
+    unless session[:id]
+      flash[:notice] = 'please login!'
+      redirect '/login'
+    end
+    choices = fetch_user_choices_by_id session[:id]
     query_topics = choices.join(', ')
     @articles = newsapi.get_everything(q: query_topics,
                                        sources: 'bbc-news,the-verge',

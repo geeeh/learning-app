@@ -9,12 +9,12 @@ class User < ActiveRecord::Base
 
   validates :username, :email, length: {
     maximum: 35,
-    too_long: 'must have at least %{count} letters'
+    too_long: 'must have at most %{count} letters'
   }, uniqueness: true
 
-  validates :password, format: {
-    with: /\A[a-zA-Z0-9!@#\$%^&\(\)]+\z/,
-    message: "only allows a-z, 0-9 and !@\#$%^&*()"
+  validates :password, length: {
+    minimum: 8,
+    too_short: 'must have at least %{count} letters'
   }
 
   def encrypt_password(password)

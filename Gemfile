@@ -14,6 +14,7 @@ gem 'sinatra-flash'
 gem 'news-api'
 gem 'rufus-scheduler'
 gem 'pony'
+gem 'haml'
 
 group :test do
   gem 'rack-test'

@@ -3,6 +3,10 @@
 # SubjectController class.
 class SubjectController < BaseController
   get_categories = lambda do
+    unless session[:id]
+      flash[:notice] = 'please login!'
+      redirect '/login'
+    end
     @categories = Subject.all
     @user = User.find_by(id: session[:id])
     @user_categories = @user.subjects.all
