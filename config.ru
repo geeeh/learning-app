@@ -14,5 +14,5 @@ use SubjectController
 use TopicController
 
 map '/' do
-  run BaseController
+  run Sinatra::Application
 end
