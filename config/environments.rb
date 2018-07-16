@@ -2,12 +2,12 @@
 
 configure :development, :production do
   ActiveRecord::Base.establish_connection(
-    adapter: 'postgresql',
-    host: 'localhost',
-    username: 'godwingitonga',
-    password: nil,
-    database: 'micro-learning',
-    encoding: 'utf8'
+    adapter: ENV['ADAPTER'] || 'postgresql',
+    host: ENV['HOST'] || 'localhost',
+    username: ENV['USER'] || 'godwingitonga',
+    password: ENV['PASSWORD'] || nil,
+    database: ENV['DATABASE'] || 'micro-learning',
+    encoding: ENV['ENCODING'] || 'utf8'
   )
 end
 

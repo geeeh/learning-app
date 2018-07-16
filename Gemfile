@@ -15,10 +15,10 @@ gem 'news-api'
 gem 'rufus-scheduler'
 gem 'pony'
 gem 'haml'
+gem 'rake'
 
 group :test do
   gem 'rack-test'
-  gem 'rake'
   gem 'rspec'
   gem 'database_cleaner'
   gem 'simplecov'
