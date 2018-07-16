@@ -48,6 +48,8 @@ class AuthController < BaseController
     @new_user = User.new(email: email, username: username)
     @new_user.encrypt_password params['password']
     @new_user.save
+
+    puts @new_user.errors.messages unless @new_user.errors.nil?
     redirect '/login'
   end
 

@@ -1,2 +1,10 @@
 language: ruby
-rvm: 2.5.1p57
+rvm: 2.5.1
+services:
+  - postgresql
+
+before_script:
+- psql -c 'create database tests;' -U postgres
+
+script:
+  - bundle exec rspec

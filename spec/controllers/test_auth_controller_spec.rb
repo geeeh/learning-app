@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './helpers/spec_helper.rb'
+require_relative '../spec_helper.rb'
 
 describe 'Micro Learning Application' do
   context 'when trying to access registration page' do
@@ -39,7 +39,7 @@ describe 'Micro Learning Application' do
       }
     end
 
-    it 'should redirect to login' do
+    it 'should redirect to register' do
       post '/register', @test_user
       expect(last_request.path).to eq('/register')
     end
@@ -56,7 +56,6 @@ describe 'Micro Learning Application' do
     end
     it 'should redirect back to register with a flash message' do
       post '/register', @user
-      expect(last_response).to be_redirect
       expect(last_request.path).to eq('/register')
     end
   end

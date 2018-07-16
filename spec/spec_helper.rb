@@ -3,6 +3,7 @@
 require 'rack/test'
 require 'rspec'
 require 'database_cleaner'
+require 'sinatra'
 
 ENV['RACK_ENV'] = 'test'
 
@@ -12,10 +13,15 @@ require 'simplecov'
 
 SimpleCov.start
 
+class All < Sinatra::Application
+  use BaseController
+  use AuthController
+end
+
 module RSpecMixin
   include Rack::Test::Methods
   def app
-    BaseController
+    All
   end
 end
 

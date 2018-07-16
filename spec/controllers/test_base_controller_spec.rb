@@ -1,4 +1,6 @@
-require './helpers/spec_helper.rb'
+# frozen_string_literal: true
+
+require_relative '../spec_helper.rb'
 
 describe 'Micro Learning Application' do
   context 'When user tries to access landing page' do
@@ -14,5 +16,4 @@ describe 'Micro Learning Application' do
       expect(last_response).to be_redirect
     end
   end
-
 end

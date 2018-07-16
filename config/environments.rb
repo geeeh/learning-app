@@ -14,9 +14,6 @@ end
 configure :test do
   ActiveRecord::Base.establish_connection(
     adapter: 'postgresql',
-    host: 'localhost',
-    username: 'godwingitonga',
-    password: nil,
     database: 'tests',
     encoding: 'utf8'
   )
