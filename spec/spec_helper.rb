@@ -9,6 +9,8 @@ ENV['RACK_ENV'] = 'test'
 
 require './app/controllers/auth_controller.rb'
 require './app/controllers/base_controller.rb'
+require './app/controllers/category_controller.rb'
+require './app/controllers/topic_controller.rb'
 require 'simplecov'
 
 SimpleCov.start
@@ -16,6 +18,8 @@ SimpleCov.start
 class All < Sinatra::Application
   use BaseController
   use AuthController
+  use SubjectController
+  use TopicController
 end
 
 module RSpecMixin

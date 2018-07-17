@@ -29,7 +29,7 @@ describe 'Micro Learning Application' do
     end
     it 'should be redirect access categories page' do
       get '/categories'
-      expect(last_response).to be_ok
+      expect(last_request.path).to eq('/categories')
     end
   end
 end

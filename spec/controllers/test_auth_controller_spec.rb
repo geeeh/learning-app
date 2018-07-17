@@ -18,7 +18,7 @@ describe 'Micro Learning Application' do
   context 'when passed correct registration data' do
     before do
       @test_user = {
-        username: 'test_user',
+        username: 'test',
         email: 'test.user@gmail.com',
         password: '123123123'
       }

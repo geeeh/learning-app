@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Micro Learning Application' do
   before do
     @test_user = {
@@ -23,9 +25,9 @@ describe 'Micro Learning Application' do
 
       post '/login', @test_login_user
     end
-    it 'should be redirect access categories page' do
+    it 'should be redirect access topics page' do
       get '/topics'
-      expect(last_response).to be_ok
+      expect(last_request.path).to eq('/topics')
     end
   end
 end
