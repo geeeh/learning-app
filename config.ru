@@ -9,10 +9,6 @@ end
 
 require './app/scheduler/scheduler.rb'
 
-use AuthController
-use SubjectController
-use TopicController
-
 map '/' do
-  run Sinatra::Application
+  run App
 end

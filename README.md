@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/geeeh/learning-app.svg?branch=master)](https://travis-ci.org/geeeh/learning-app)
+
 ##### Learning Application
 Learning app is a ruby Application that allows users to learn new stories every day based on their user preferences
 

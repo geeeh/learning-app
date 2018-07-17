@@ -1,20 +1,17 @@
 # frozen_string_literal: true
 
 require 'sinatra'
-require 'sinatra/base'
+require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/flash'
 require 'haml'
 
-require './config/environments'
-
 # Base controller for all other controllers.
-class BaseController < Sinatra::Base
+class App < Sinatra::Application
   register Sinatra::Flash
-  env_choice = ENV['RACK_ENV'] || 'development'
 
   configure do
-    set :environment, env_choice
+    set :environment, ENV['RACK_ENV']
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
@@ -38,3 +35,7 @@ class BaseController < Sinatra::Base
   get '/', &landing
   get '/dashboard', &get_dashboard
 end
+
+require_relative 'auth_controller'
+require_relative 'category_controller'
+require_relative 'topic_controller'

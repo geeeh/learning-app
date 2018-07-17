@@ -1,7 +1,8 @@
 # frozen_string_literal: true
+require 'sinatra'
 
 # SubjectController class.
-class SubjectController < BaseController
+class App < Sinatra::Application
   get_categories = lambda do
     unless session[:id]
       flash[:notice] = 'please login!'

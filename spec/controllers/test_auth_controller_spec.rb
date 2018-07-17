@@ -20,13 +20,37 @@ describe 'Micro Learning Application' do
       @test_user = {
         username: 'test',
         email: 'test.user@gmail.com',
-        password: '123123123'
+        password: '1231231234'
       }
     end
 
     it 'should redirect to login' do
       post '/register', @test_user
+      follow_redirect!
       expect(last_request.path).to eq('/login')
+    end
+  end
+
+  context 'when passed correct login data' do
+    before do
+      @test_user = {
+        username: 'test',
+        email: 'test.user@gmail.com',
+        password: '1231231234'
+      }
+
+      @test_user_login = {
+        email: 'test.user@gmail.com',
+        password: '1231231234'
+      }
+
+      post '/register', @test_user
+    end
+
+    it 'should redirect to daily topics page' do
+      post '/login', @test_user
+      follow_redirect!
+      expect(last_request.path).to eq('/topics')
     end
   end
 
@@ -56,7 +80,30 @@ describe 'Micro Learning Application' do
     end
     it 'should redirect back to register with a flash message' do
       post '/register', @user
-      expect(last_request.path).to eq('/register')
+      follow_redirect!
+      expect(last_response.body).to include('Email Already taken!')
+    end
+  end
+
+  context 'when passed already existing username' do
+    before do
+      @initial_user = {
+        username: 'test_user',
+        email: 'test@gmail.com',
+        password: '123123123'
+      }
+
+      @current_user = {
+        username: 'test_user',
+        email: 'test1@gmail.com',
+        password: '123123123'
+      }
+      post '/register', @initial_user
+    end
+    it 'should redirect back to register with a flash message' do
+      post '/register', @current_user
+      follow_redirect!
+      expect(last_response.body).to include('Username already taken!')
     end
   end
 end

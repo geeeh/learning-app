@@ -15,3 +15,8 @@
           .form-group
             %input#exampleInputPassword2.form-control{:placeholder => "Retype Password", :id => "confirm-password", :name =>"password-confirmation", :type => "password"}/  
           %button.btn.btn-outline-primary.sign-in{:type => "submit"} Sign up
+          - if flash[:notice]
+            .form-group{class: "show-warning"}
+              %div{class: "alert alert-warning", "data-alert" => ""}
+                = flash[:notice]
+                %a.close{href: "#"} ×

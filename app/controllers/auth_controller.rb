@@ -1,10 +1,13 @@
 # frozen_string_literal: true
-
-require './app/controllers/base_controller'
+require 'sinatra'
 require 'bcrypt'
+require './app/controllers/base_controller'
+require './app/models/user.rb'
+
+
 
 # Auth controller class.
-class AuthController < BaseController
+class App < Sinatra::Application
   login_user_page = lambda do
     haml :index
   end

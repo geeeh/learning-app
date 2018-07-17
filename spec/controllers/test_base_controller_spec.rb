@@ -14,6 +14,7 @@ describe 'Micro Learning Application' do
     it 'should redirect to login' do
       get '/dashboard'
       expect(last_response).to be_redirect
+      follow_redirect!
     end
   end
 end

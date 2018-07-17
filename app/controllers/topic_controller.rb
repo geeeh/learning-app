@@ -1,10 +1,10 @@
 # frozen_string_literal: true
-
+require 'sinatra'
 require 'news-api'
 require 'pony'
 
 # class TopicController
-class TopicController < BaseController
+class App < Sinatra::Application
   newsapi = News.new('802e4f6a5477493d9975957c95dfe76f')
 
   def fetch_user_choices_by_id(user_id)

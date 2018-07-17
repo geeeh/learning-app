@@ -5,27 +5,17 @@ require 'rspec'
 require 'database_cleaner'
 require 'sinatra'
 
-ENV['RACK_ENV'] = 'test'
-
-require './app/controllers/auth_controller.rb'
 require './app/controllers/base_controller.rb'
-require './app/controllers/category_controller.rb'
-require './app/controllers/topic_controller.rb'
 require 'simplecov'
 
 SimpleCov.start
 
-class All < Sinatra::Application
-  use BaseController
-  use AuthController
-  use SubjectController
-  use TopicController
-end
+ENV['RACK_ENV'] = 'test'
 
 module RSpecMixin
   include Rack::Test::Methods
   def app
-    All
+    App
   end
 end
 
@@ -38,10 +28,6 @@ RSpec.configure do |config|
 
   config.before :each do
     DatabaseCleaner.strategy = :transaction
-  end
-
-  config.before(:each, js: true) do
-    DatabaseCleaner.strategy = :truncation
   end
 
   config.before :each do
