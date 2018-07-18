@@ -1,0 +1,10 @@
+.topics
+  %h4 Daily Digest
+  - articles.each do |element|
+    .topic-item
+      %img{:src => "#{element.urlToImage}"}/
+      .info
+        %h4 #{element.name}
+        %p #{element.description}
+        %button{:class => 'btn btn-outline-secondary'}
+          %a(href="#{element.url}") more...

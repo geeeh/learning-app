@@ -1,0 +1,9 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
+  %button.navbar-toggler{"aria-controls" => "navbarTogglerDemo01", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarTogglerDemo01", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  #navbarTogglerDemo01.collapse.navbar-collapse
+    %a.navbar-brand.dash-heading{:href => "#"} Micro-Learning
+    %ul.navbar-nav.ml-auto.mt-2.mt-lg-0
+      %li
+        %a{:href=>"#"} 
+          %img{:src=>"/imgs/user.svg"} #{session[:username]}
