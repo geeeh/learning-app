@@ -1,5 +1,5 @@
 = haml :dashboard
-.categories{:style=> "position: absolute"}
+.categories
   %button{:class=> "btn btn-outline-secondary category-creation", "data-target" => "#exampleModalCenter", "data-toggle" => "modal", :type => "button" } Add category
   #exampleModalCenter.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalCenterTitle", :role => "dialog", :tabindex => "-1"}
     .modal-dialog.modal-dialog-centered{:role => "document"}
@@ -19,3 +19,9 @@
               :preserve
               %text{:placeholder => "Password", :type => ""}/
             %button.btn.btn-primary{:type => "submit"} Submit
+  
+  - if flash[:notice]
+    .form-group{class: "show-warning"}
+      %div{class: "alert alert-warning", "data-alert" => ""}
+        = flash[:notice]
+        %a.close{href: "#"}

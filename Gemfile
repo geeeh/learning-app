@@ -22,4 +22,5 @@ group :test do
   gem 'rspec'
   gem 'database_cleaner'
   gem 'simplecov'
+  gem 'coveralls'
 end

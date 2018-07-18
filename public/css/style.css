@@ -225,6 +225,7 @@ p, .more-info, a, h1, h2, h3, h4, h5, h6, button {
 .categories .hiddenCB input[type="checkbox"]+label {
     width: 150px;
     background: #FFFFFF;
+    margin: 20px;
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
 }
 
@@ -296,4 +297,15 @@ p, .more-info, a, h1, h2, h3, h4, h5, h6, button {
 
 .topics .topic-item .info a{
     color: #F43B00;
+}
+
+.categories .hiddenCB {
+    display: inline;
+}
+.categories .hiddenCB .category-item {
+    max-width: 150px;
+    margin: 20px;
+    padding: 10px 50px;
+    background: #F5F5F5;
+    /* box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1); */
 }

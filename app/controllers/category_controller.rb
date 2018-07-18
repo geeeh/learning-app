@@ -1,5 +1,8 @@
 # frozen_string_literal: true
+
 require 'sinatra'
+require './app/models/category.rb'
+require './app/models/user.rb'
 
 # SubjectController class.
 class App < Sinatra::Application
@@ -21,7 +24,13 @@ class App < Sinatra::Application
 
   add_categories = lambda do
     @user = User.find_by(id: session[:id])
+    p params
     params['choice'].each do |item|
+      user_categories = @user.subjects.find_by(id: item)
+      if user_categories
+        flash[:notice] = 'you already have this category'
+        redirect '/categories'
+      end
       category = Subject.find_by(id: item)
       @user.subjects << category
       @user.save
@@ -30,7 +39,11 @@ class App < Sinatra::Application
   end
 
   create_subject = lambda do
-    Subject.create(name: params['name'], description: params['description'])
+    @category = Subject.create(name: params['name'], description: params['description'])
+    unless @category.errors.messages.empty?
+      flash[:notice] = 'this category already exists!'
+      redirect '/addcategories'
+    end
     redirect '/categories'
   end
 
