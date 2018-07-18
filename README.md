@@ -1,14 +1,20 @@
+
 [![Build Status](https://travis-ci.org/geeeh/learning-app.svg?branch=master)](https://travis-ci.org/geeeh/learning-app)
 
-##### Learning Application
-Learning app is a ruby Application that allows users to learn new stories every day based on their user preferences
+[![Coverage Status](https://coveralls.io/repos/github/geeeh/learning-app/badge.svg?branch=master)](https://coveralls.io/github/geeeh/learning-app?branch=master)
+
+##### Learning App
+Learning app is a ruby Application that allows users to learn new stories every day based on their user preferences.
+This application is hosted on heroku.
+[Learning App](https://g-learning-app.herokuapp.com/)
+
 
 ###### Installation and Setup
 To use Learning app locally:
  - Clone the app by running `$ git clone https://github.com/geeeh/learning-app.git`
  - Get into the project root folder `$ cd learning-app`
  - Install dependencies `$ bundle install`
- - Run app `$ thin`
+ - Run app `$ thin start`
 
  ###### Currently working endpoints
 
