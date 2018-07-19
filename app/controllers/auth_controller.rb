@@ -1,10 +1,9 @@
 # frozen_string_literal: true
+
 require 'sinatra'
 require 'bcrypt'
 require './app/controllers/base_controller'
-require './app/models/user.rb'
-
-
+require './app/models/user'
 
 # Auth controller class.
 class App < Sinatra::Application
@@ -20,15 +19,14 @@ class App < Sinatra::Application
     @user = User.new
     @existing_user = User.find_by(email: params['email'])
     unless @existing_user
-      begin
-        flash[:notice] = 'wrong login credentials!'
-        redirect '/login'
-      end
+      flash[:notice] = 'wrong login credentials!'
+      redirect '/login'
     end
     result = @user.confirm_password(params['password'], @existing_user)
     if result
-      session[:id] = @existing_user.id
+      session[:user_id] = @existing_user.id
       session[:username] = @existing_user.username
+      session[:admin] = @existing_user.admin?
       redirect '/topics'
     else
       flash[:notice] = 'wrong login credentials!'
@@ -39,20 +37,14 @@ class App < Sinatra::Application
   register_user = lambda do
     email = params['email']
     username = params['username']
-    if User.find_by(email: email)
-      flash[:notice] = 'Email Already taken!'
+    password = params['password']
+    @new_user = User.create(email: email, username: username, password: password)
+    unless @new_user.valid?
+      @new_user.errors.messages.each do |key, value|
+        flash[key] = value.join(',') unless value.empty?
+      end
       redirect '/register'
     end
-
-    if User.find_by(username: username)
-      flash[:notice] = 'Username already taken!'
-      redirect '/register'
-    end
-    @new_user = User.new(email: email, username: username)
-    @new_user.encrypt_password params['password']
-    @new_user.save
-
-    puts @new_user.errors.messages unless @new_user.errors.nil?
     redirect '/login'
   end
 

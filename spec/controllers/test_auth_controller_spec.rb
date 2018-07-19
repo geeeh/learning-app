@@ -15,6 +15,18 @@ describe 'Micro Learning Application' do
     end
   end
 
+  context 'when trying to access login page' do
+    it 'should be accessible' do
+      get '/login'
+      expect(last_response).to be_ok
+    end
+
+    it 'should lead to registration' do
+      get '/login'
+      expect(last_request.path).to eq('/login')
+    end
+  end
+
   context 'when passed correct registration data' do
     before do
       @test_user = {
@@ -32,23 +44,13 @@ describe 'Micro Learning Application' do
   end
 
   context 'when passed correct login data' do
-    before do
-      @test_user = {
-        username: 'test',
-        email: 'test.user@gmail.com',
-        password: '1231231234'
-      }
-
-      @test_user_login = {
-        email: 'test.user@gmail.com',
-        password: '1231231234'
-      }
-
-      post '/register', @test_user
-    end
-
     it 'should redirect to daily topics page' do
-      post '/login', @test_user
+      test_user_login = {
+        email: 'admin@gmail.com',
+        password: '123454321'
+      }
+
+      post '/login', test_user_login
       follow_redirect!
       expect(last_request.path).to eq('/topics')
     end
@@ -73,7 +75,7 @@ describe 'Micro Learning Application' do
     before do
       @user = {
         username: 'test_user',
-        email: 'test@gmail.com',
+        email: 'admin@gmail.com',
         password: '123123123'
       }
       post '/register', @user
@@ -81,29 +83,20 @@ describe 'Micro Learning Application' do
     it 'should redirect back to register with a flash message' do
       post '/register', @user
       follow_redirect!
-      expect(last_response.body).to include('Email Already taken!')
+      expect(last_response.body).to include('has already been taken')
     end
   end
 
   context 'when passed already existing username' do
-    before do
-      @initial_user = {
-        username: 'test_user',
-        email: 'test@gmail.com',
-        password: '123123123'
-      }
-
-      @current_user = {
-        username: 'test_user',
-        email: 'test1@gmail.com',
-        password: '123123123'
-      }
-      post '/register', @initial_user
-    end
     it 'should redirect back to register with a flash message' do
-      post '/register', @current_user
+      current_user = {
+        username: 'Admin',
+        email: 'newadmin@gmail.com',
+        password: '123454321'
+      }
+      post '/register', current_user
       follow_redirect!
-      expect(last_response.body).to include('Username already taken!')
+      expect(last_response.body).to include('has already been taken')
     end
   end
 end

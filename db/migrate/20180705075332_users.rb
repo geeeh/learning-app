@@ -5,6 +5,7 @@ class Users < ActiveRecord::Migration[5.2]
       column.string :username
       column.string :email
       column.string :password
+      column.boolean :admin, default: false
       column.string :salt
       column.timestamps null: false
     end

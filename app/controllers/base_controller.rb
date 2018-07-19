@@ -6,6 +6,8 @@ require 'sinatra/activerecord'
 require 'sinatra/flash'
 require 'haml'
 
+require './app/middleware/authenticator'
+
 # Base controller for all other controllers.
 class App < Sinatra::Application
   register Sinatra::Flash
@@ -26,16 +28,13 @@ class App < Sinatra::Application
   get_dashboard = lambda do
     if session[:id]
       haml :dashboard
-    else
-      flash[:notice] = 'please login!'
-      redirect '/login'
     end
   end
 
   get '/', &landing
-  get '/dashboard', &get_dashboard
+  get '/dashboard', auth: true, &get_dashboard
 end
 
 require_relative 'auth_controller'
-require_relative 'category_controller'
+require_relative 'subject_controller'
 require_relative 'topic_controller'

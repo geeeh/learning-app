@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2018_07_13_073541) do
     t.string "username"
     t.string "email"
     t.string "password"
+    t.boolean "admin", default: false
     t.string "salt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

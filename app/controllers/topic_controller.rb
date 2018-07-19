@@ -3,15 +3,14 @@
 require 'sinatra'
 require 'pony'
 require_relative '../clients/news_api'
+require './app/middleware/authenticator'
 
 # class TopicController
 class App < Sinatra::Application
   def fetch_user_choices_by_id(user_id)
     choices = []
-    user = User.find_by(id: user_id)
-    p user.subjects.all.empty?
-    redirect '/categories' if user.subjects.all.empty?
-    user.subjects.all.each do |item|
+    redirect '/categories' if @user.subjects.all.empty?
+    @user.subjects.all.each do |item|
       choices << item.name
     end
     choices
@@ -19,11 +18,6 @@ class App < Sinatra::Application
 
   get_topics = lambda do
     news_api = NewsApiClient.new
-    puts session[:id]
-    unless session[:id]
-      flash[:notice] = 'please login!'
-      redirect '/login'
-    end
     choices = fetch_user_choices_by_id session[:id]
     query_topics = choices.join(', ')
     @articles = news_api.fetch_stories query_topics
@@ -47,5 +41,5 @@ class App < Sinatra::Application
     # code here
   end
 
-  get '/topics', &get_topics
+  get '/topics', auth: true, &get_topics
 end

@@ -12,6 +12,11 @@
         - @user_categories.each do |element|
           .category-item
             #{element['name']}
+            %form{:action => "/categories/delete", :method => "post", :role => "form"}
+              %input{:value => 'delete', :type => 'hidden', :name => '_method'}/
+              %input{:value => "#{element['id']}", :type => 'hidden', :name => 'id'}/
+              %button.delete-button
+                %img{:src=>'/imgs/garbage.svg'}
 
   .hiddenCB
     %div

@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
     too_short: 'must have at least %{count} letters'
   }
 
+  before_create do
+    encrypt_password password
+  end
+
   def encrypt_password(password)
     password_salt = BCrypt::Engine.generate_salt
     password_hash = BCrypt::Engine.hash_secret(password, password_salt)
@@ -32,5 +36,13 @@ class User < ActiveRecord::Base
     else
       @confirmed
     end
+  end
+
+  def set_admin
+    self.admin = true
+  end
+
+  def admin?
+    admin
   end
 end

@@ -5,18 +5,56 @@
         %img.background-image{:src=>"imgs/background.jpg"}
       .col-sm-6.sign-in-space
         %h4.reg_head Sign up
-        %form.registration{:action => "/register", :method => "post", :role => "form"}
+        %form.registration.needs-validation{:action => "/register", :method => "post", :role => "form", :style=>'margin-top: 80px', :novalidate => ""}
           .form-group
-            %input#exampleInputUsername1.form-control{"aria-describedby" => "emailHelp", :name =>"username", :placeholder => "Enter username", :type => "text"}/
+            %input#username.form-control{"aria-describedby" => "inputGroupPrepend", :name => "username", :placeholder => "Username", :required => "", :type => "text"}/
+            .invalid-feedback
+              Please choose a username.
+            - if flash[:username]
+              .form-group{class: "show-warning"}
+                %div{class: "alert alert-danger", "data-alert" => ""}
+                  = flash[:username]
+
           .form-group
-            %input#exampleInputEmail1.form-control{"aria-describedby" => "emailHelp", :name =>"email", :placeholder => "Enter email", :type => "email"}/
+            %input#useremail.form-control{:placeholder => "email", :required => "", :name => "email", :type => "email", :value => ""}/
+            .invalid-feedback
+              provide a valid email!
+            - if flash[:email]
+              .form-group{class: "show-warning"}
+                %div{class: "alert alert-danger", "data-alert" => ""}
+                  = flash[:email]
+
           .form-group
-            %input#exampleInputPassword1.form-control{:placeholder => "Password", :id => "password", :name =>"password", :type => "password"}/
-          .form-group
-            %input#exampleInputPassword2.form-control{:placeholder => "Retype Password", :id => "confirm-password", :name =>"password-confirmation", :type => "password"}/  
+            %input#userpassword.form-control{:placeholder => "password", :required => "", :name => "password", :type => "password", :value => ""}/
+            .invalid-feedback
+              provide a valid password
+            - if flash[:password]
+              .form-group{class: "show-warning"}
+                %div{class: "alert alert-danger", "data-alert" => ""}
+                  = flash[:password]
+
           %button.btn.btn-outline-primary.sign-in{:type => "submit"} Sign up
+
           - if flash[:notice]
             .form-group{class: "show-warning"}
               %div{class: "alert alert-warning", "data-alert" => ""}
                 = flash[:notice]
-                %a.close{href: "#"} ×
+                %a.close{href: "#"}
+
+:javascript
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      var forms = document.getElementsByClassName('needs-validation');
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+              
