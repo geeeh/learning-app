@@ -1,23 +1,24 @@
 # frozen_string_literal: true
 
 require 'sinatra'
+
 require './app/models/subject'
 require './app/models/user'
 require './app/middleware/authenticator'
 
 # SubjectController class.
 class App < Sinatra::Application
-  get_categories = lambda do
+  get '/categories', auth: true do
     @categories = Subject.all
-    @user_categories = @user.subjects.all
+    @user_categories = @user.subjects
     haml :categories
   end
 
-  add_categories_page = lambda do
+  get '/addcategories', auth: true do
     haml :addcategory
   end
 
-  add_categories = lambda do
+  post '/categories/add', auth: true do
     params['choice'].each do |item|
       user_categories = @user.subjects.find_by(id: item)
       if user_categories
@@ -31,7 +32,7 @@ class App < Sinatra::Application
     redirect '/categories'
   end
 
-  create_subject = lambda do
+  post '/categories', auth: true do
     @category = Subject.create(name: params['name'], description: params['description'])
     unless @category.errors.messages.empty?
       flash[:notice] = 'this category already exists!'
@@ -40,22 +41,9 @@ class App < Sinatra::Application
     redirect '/categories'
   end
 
-  delete_subject = lambda do
+  delete '/categories/:id', auth: true do
     @subject = Subject.find_by(id: params[:id])
     @subject.delete
     redirect '/categories'
   end
-
-  delete_subject = lambda do
-    @subject = Subject.find_by(id: params[:id])
-    @subject.delete
-    redirect '/categories'
-  end
-
-  get '/categories', auth: true, &get_categories
-  get '/addcategories', auth: true, &add_categories_page
-  post '/categories', auth: true, &create_subject
-  post '/categories/delete', auth: true, &delete_subject
-  post '/categories/add', auth: true, &add_categories
-  delete '/categories/:id', auth: true, &delete_subject
 end

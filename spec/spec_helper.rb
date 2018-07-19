@@ -37,6 +37,8 @@ RSpec.configure do |config|
 
   config.before :each do
     DatabaseCleaner.start
+    results = [{}]
+    allow(NewsApiClient).to receive(:fetch_stories).and_return(results)
   end
 
   config.after :each do

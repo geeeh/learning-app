@@ -16,6 +16,7 @@ gem 'rufus-scheduler'
 gem 'pony'
 gem 'haml'
 gem 'rake'
+gem 'sendgrid-ruby'
 
 group :test do
   gem 'rack-test'

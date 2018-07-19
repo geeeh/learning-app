@@ -2,20 +2,21 @@
 
 require 'sinatra'
 require 'bcrypt'
+
 require './app/controllers/base_controller'
 require './app/models/user'
 
 # Auth controller class.
 class App < Sinatra::Application
-  login_user_page = lambda do
+  get '/login' do
     haml :index
   end
 
-  register_user_page = lambda do
+  get '/register' do
     haml :register
   end
 
-  login_user = lambda do
+  post '/login' do
     @user = User.new
     @existing_user = User.find_by(email: params['email'])
     unless @existing_user
@@ -34,7 +35,7 @@ class App < Sinatra::Application
     end
   end
 
-  register_user = lambda do
+  post '/register' do
     email = params['email']
     username = params['username']
     password = params['password']
@@ -48,14 +49,8 @@ class App < Sinatra::Application
     redirect '/login'
   end
 
-  logout_user = lambda do
+  get '/logout' do
     session[:user_id] = nil
     redirect '/'
   end
-
-  get '/login', &login_user_page
-  get '/register', &register_user_page
-  post '/login', &login_user
-  post '/register', &register_user
-  get '/logout', &logout_user
 end

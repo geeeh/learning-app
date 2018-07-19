@@ -21,18 +21,9 @@ class App < Sinatra::Application
   end
 
   # Homepage
-  landing = lambda do
+  get '/' do
     haml :index
   end
-
-  get_dashboard = lambda do
-    if session[:id]
-      haml :dashboard
-    end
-  end
-
-  get '/', &landing
-  get '/dashboard', auth: true, &get_dashboard
 end
 
 require_relative 'auth_controller'

@@ -3,7 +3,7 @@
 require './app/models/user'
 users = [
   { username: 'Admin', email: 'admin@gmail.com', password: '123454321' },
-  { username: 'godwin', email: 'godwin@gmail.com', password: '123454321' }
+  { username: 'godwin', email: 'dev.godwin.gitonga@gmail.com', password: '123454321' }
 ]
 
 users.each do |user|
