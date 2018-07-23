@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'dotenv/load'
 
 Dir.glob('./app/models/*.rb').sort.each do |file|
   require file

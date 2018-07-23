@@ -5,7 +5,7 @@ require 'news-api'
 # News Api client
 class NewsApiClient
   def initialize(api_key = nil)
-    @api_key = api_key || '802e4f6a5477493d9975957c95dfe76f'
+    @api_key = api_key || ENV['NEWS_API_KEY']
     @news_api = News.new(@api_key)
   end
 

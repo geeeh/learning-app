@@ -7,7 +7,7 @@ class Mailer
   include SendGrid
 
   def compose_email(recipient_email)
-    from = Email.new(email: 'godwingitonga89@gmail.com')
+    from = Email.new(email: ENV['ADMIN_EMAIL'])
     to = Email.new(email: recipient_email)
     subject = 'Daily digest'
     content = Content.new(type: 'text/html', value: '
@@ -20,7 +20,7 @@ class Mailer
 
   def send_emails(email)
     mail = compose_email(email)
-    sg = SendGrid::API.new(api_key: "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")
+    sg = SendGrid::API.new(api_key: ENV['SEND_GRID_API'])
     response = sg.client.mail._('send').post(request_body: mail.to_json)
     puts response.status_code
   end

@@ -32,11 +32,19 @@
             %input#useremail.form-control{:placeholder => "email", :required => "", :name => "email", :type => "email", :value => ""}/
             .invalid-feedback
               provide a valid email!
+            - if flash[:email]
+              .form-group{class: "show-warning"}
+                %div{class: "alert alert-danger", "data-alert" => ""}
+                  = flash[:email]
 
           .form-group
             %input#userpassword.form-control{:placeholder => "password", :required => "", :name => "password", :type => "password", :value => ""}/
             .invalid-feedback
               provide a valid password
+              - if flash[:password]
+                .form-group{class: "show-warning"}
+                  %div{class: "alert alert-danger", "data-alert" => ""}
+                    = flash[:password]
           %button.btn.btn-outline-primary.sign-in{:type => "submit"} Sign in
 
 

@@ -17,7 +17,7 @@ class App < Sinatra::Application
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, '@31412drsvsgt!sdasdnjf34vb'
+    set :session_secret, ENV['SESSION_SECRET']
   end
 
   # Homepage
@@ -27,5 +27,5 @@ class App < Sinatra::Application
 end
 
 require_relative 'auth_controller'
-require_relative 'subject_controller'
+require_relative 'category_controller'
 require_relative 'topic_controller'

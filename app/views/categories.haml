@@ -12,9 +12,8 @@
         - @user_categories.each do |element|
           .category-item
             #{element['name']}
-            %form{:action => "/categories/delete", :method => "post", :role => "form"}
+            %form{:action => "/categories/#{element['id']}", :method => "post", :role => "form"}
               %input{:value => 'delete', :type => 'hidden', :name => '_method'}/
-              %input{:value => "#{element['id']}", :type => 'hidden', :name => 'id'}/
               %button.delete-button
                 %img{:src=>'/imgs/garbage.svg'}
 
@@ -26,4 +25,4 @@
           - @categories.each do |element|
             %input{:id => "#{element['name']}", :name => "choice[]", :type => "checkbox", :value =>"#{element['id']}"}/
             %label{:for => "#{element['name']}"} #{element['name']}
-          %button.btn.btn-primary{:type => "submit"} Submit  
+          %button.btn.btn-primary{:type => "submit"} Submit

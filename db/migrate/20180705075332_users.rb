@@ -4,9 +4,8 @@ class Users < ActiveRecord::Migration[5.2]
     create_table :users do |column|
       column.string :username
       column.string :email
-      column.string :password
+      column.string :password_digest
       column.boolean :admin, default: false
-      column.string :salt
       column.timestamps null: false
     end
   end

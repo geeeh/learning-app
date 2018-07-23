@@ -17,20 +17,19 @@ class App < Sinatra::Application
   end
 
   post '/login' do
-    @user = User.new
     @existing_user = User.find_by(email: params['email'])
     unless @existing_user
-      flash[:notice] = 'wrong login credentials!'
+      flash[:email] = 'Email not found!'
       redirect '/login'
     end
-    result = @user.confirm_password(params['password'], @existing_user)
+    result = @existing_user.authenticate(params['password'])
     if result
       session[:user_id] = @existing_user.id
       session[:username] = @existing_user.username
       session[:admin] = @existing_user.admin?
       redirect '/topics'
     else
-      flash[:notice] = 'wrong login credentials!'
+      flash[:password] = 'wrong login credentials!'
       redirect '/login'
     end
   end

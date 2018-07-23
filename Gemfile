@@ -17,6 +17,7 @@ gem 'pony'
 gem 'haml'
 gem 'rake'
 gem 'sendgrid-ruby'
+gem 'dotenv'
 
 group :test do
   gem 'rack-test'

@@ -10,3 +10,6 @@
         %button{:class => 'btn btn-outline-secondary'}
           %a(href="#{element.url}") more...
 
+.category-list
+  = render(:haml, :'_category_list', :locals => {:selected_categories => @selected_categories})
+

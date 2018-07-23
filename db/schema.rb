@@ -15,32 +15,31 @@ ActiveRecord::Schema.define(version: 2018_07_13_073541) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "subjects", force: :cascade do |t|
+  create_table "categories", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_subjects", force: :cascade do |t|
+  create_table "user_categories", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "subject_id"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["subject_id"], name: "index_user_subjects_on_subject_id"
-    t.index ["user_id"], name: "index_user_subjects_on_user_id"
+    t.index ["category_id"], name: "index_user_categories_on_category_id"
+    t.index ["user_id"], name: "index_user_categories_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.boolean "admin", default: false
-    t.string "salt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "user_subjects", "subjects"
-  add_foreign_key "user_subjects", "users"
+  add_foreign_key "user_categories", "categories"
+  add_foreign_key "user_categories", "users"
 end

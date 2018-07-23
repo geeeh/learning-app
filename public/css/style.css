@@ -304,7 +304,8 @@ p, .more-info, a, h1, h2, h3, h4, h5, h6, button {
     display: inline;
 }
 .categories .hiddenCB .category-item {
-    max-width: 160px;
+    max-width: 200px;
+    min-width: 160px;
     margin: 20px;
     padding: 10px 30px;
     border-radius: 4px;
@@ -325,4 +326,32 @@ p, .more-info, a, h1, h2, h3, h4, h5, h6, button {
     background: transparent !important;
     border: 0 !important;
     opacity: 1;
+}
+
+.category-list {
+    position: fixed;
+    float: right;
+    right: 0;
+    width: 20%;
+    height: auto;
+    margin: 135px 150px;
+    border: solid 1px #ccc;
+    border-width: 0 0 0 1px;
+}
+
+.category-list-items ul {
+    list-style-type: none;
+    text-decoration: none;
+    text-align: left;
+    margin-right: 20px
+}
+
+.category-list-items h5 {
+    margin: 20px;
+}
+
+.category-list-items ul li {
+    padding: 7px 15px;
+    background: #F5F5F5;
+    margin: 10px 0;
 }

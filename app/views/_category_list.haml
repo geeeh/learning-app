@@ -1,0 +1,5 @@
+.category-list-items
+  %h5 User Categories
+  %ul#selector
+    - @selected_categories.each do |category|
+      %li #{category.name}
