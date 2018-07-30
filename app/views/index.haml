@@ -27,14 +27,43 @@
         %button.btn.btn-outline-secondary.google-login{:type=>"button"}
           %img.button-icon{:src=>"imgs/google.svg"} Google login
         %p.or or
-        %form{:action => "/login", :method => "post", :role => "form"}
+        %form.needs-validation{:action => "/login", :method => "post", :role => "form", :novalidate => ""}
           .form-group
-            %input#exampleInputEmail1.form-control{"aria-describedby" => "emailHelp", :name => "email", :placeholder => "Enter email", :type => "email"}/
+            %input#useremail.form-control{:placeholder => "email", :required => "", :name => "email", :type => "email", :value => ""}/
+            .invalid-feedback
+              provide a valid email!
+            - if flash[:email]
+              .form-group{class: "show-warning"}
+                %div{class: "alert alert-danger", "data-alert" => ""}
+                  = flash[:email]
+
           .form-group
-            %input#exampleInputPassword1.form-control{:placeholder => "Password", :name => "password", :type => "password"}/
+            %input#userpassword.form-control{:placeholder => "password", :required => "", :name => "password", :type => "password", :value => ""}/
+            .invalid-feedback
+              provide a valid password
+              - if flash[:password]
+                .form-group{class: "show-warning"}
+                  %div{class: "alert alert-danger", "data-alert" => ""}
+                    = flash[:password]
           %button.btn.btn-outline-primary.sign-in{:type => "submit"} Sign in
-          - if flash[:notice]
-            .form-group{class: "show-warning"}
-              %div{class: "alert alert-warning", "data-alert" => ""}
-                = flash[:notice]
-                %a.close{href: "#"} ×
+
+
+:javascript
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();

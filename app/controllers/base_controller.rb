@@ -6,6 +6,8 @@ require 'sinatra/activerecord'
 require 'sinatra/flash'
 require 'haml'
 
+require './app/middleware/authenticator'
+
 # Base controller for all other controllers.
 class App < Sinatra::Application
   register Sinatra::Flash
@@ -15,25 +17,13 @@ class App < Sinatra::Application
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, '@31412drsvsgt!sdasdnjf34vb'
+    set :session_secret, ENV['SESSION_SECRET']
   end
 
   # Homepage
-  landing = lambda do
+  get '/' do
     haml :index
   end
-
-  get_dashboard = lambda do
-    if session[:id]
-      haml :dashboard
-    else
-      flash[:notice] = 'please login!'
-      redirect '/login'
-    end
-  end
-
-  get '/', &landing
-  get '/dashboard', &get_dashboard
 end
 
 require_relative 'auth_controller'

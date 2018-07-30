@@ -28,6 +28,7 @@ RSpec.configure do |config|
 
   config.before :suite do
     DatabaseCleaner.clean_with :truncation
+    load './db/seeds.rb'
   end
 
   config.before :each do
@@ -36,6 +37,8 @@ RSpec.configure do |config|
 
   config.before :each do
     DatabaseCleaner.start
+    results = [{}]
+    allow(NewsApiClient).to receive(:fetch_stories).and_return(results)
   end
 
   config.after :each do

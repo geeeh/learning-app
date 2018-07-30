@@ -12,14 +12,14 @@
           %form{:action => "/categories", :method => "post", :role => "form"}
             .form-group
               %label{:for => "name"} category
-              %input#name.form-control{ :placeholder => "category title", :type => "text", :name=> "name"}/
+              %input#name.form-control{ :placeholder => "category title", :type => "text", :name=> "name", :required => ""}/
             .form-group
               %label{:for => "description"} Description
-              %textarea#description.form-control{:cols => "50", :rows => "4", :name => "description"}
+              %textarea#description.form-control{:cols => "50", :rows => "4", :name => "description", :required => ""}
               :preserve
               %text{:placeholder => "Password", :type => ""}/
             %button.btn.btn-primary{:type => "submit"} Submit
-  
+
   - if flash[:notice]
     .form-group{class: "show-warning"}
       %div{class: "alert alert-warning", "data-alert" => ""}

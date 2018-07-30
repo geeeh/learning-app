@@ -3,10 +3,46 @@
 require_relative '../spec_helper.rb'
 
 describe 'Micro Learning Application' do
+  let!(:test_user) do
+    { username: 'test',
+      email: 'test.user@gmail.com',
+      password: '1231231234' }
+  end
+  let(:test_user_login) do
+    {
+      email: 'admin@gmail.com',
+      password: '123454321'
+    }
+  end
+
+  let!(:invalid_user_email) do
+    {
+      username: 'test_user',
+      email: 'test',
+      password: '123123123'
+    }
+  end
+  let!(:stored_user) do
+    {
+      username: 'Admin',
+      email: 'admin@gmail.com',
+      password: '123454321'
+    }
+  end
+
+  let(:existing_username) do
+    {
+      username: 'Admin',
+      email: 'newadmin@gmail.com',
+      password: '123454321'
+    }
+  end
+
   context 'when trying to access registration page' do
     it 'should be accessible' do
       get '/register'
       expect(last_response).to be_ok
+      expect(last_response.body).to include('Sign up')
     end
 
     it 'should lead to registration' do
@@ -15,95 +51,54 @@ describe 'Micro Learning Application' do
     end
   end
 
-  context 'when passed correct registration data' do
-    before do
-      @test_user = {
-        username: 'test',
-        email: 'test.user@gmail.com',
-        password: '1231231234'
-      }
+  context 'when trying to access login page' do
+    it 'should be accessible' do
+      get '/login'
+      expect(last_response).to be_ok
     end
 
+    it 'should lead to registration' do
+      get '/login'
+      expect(last_request.path).to eq('/login')
+    end
+  end
+
+  context 'when passed correct registration data' do
     it 'should redirect to login' do
-      post '/register', @test_user
+      post '/register', test_user
       follow_redirect!
       expect(last_request.path).to eq('/login')
     end
   end
 
   context 'when passed correct login data' do
-    before do
-      @test_user = {
-        username: 'test',
-        email: 'test.user@gmail.com',
-        password: '1231231234'
-      }
-
-      @test_user_login = {
-        email: 'test.user@gmail.com',
-        password: '1231231234'
-      }
-
-      post '/register', @test_user
-    end
-
     it 'should redirect to daily topics page' do
-      post '/login', @test_user
+      post '/login', test_user_login
       follow_redirect!
       expect(last_request.path).to eq('/topics')
     end
   end
 
   context 'when passed incorrect registration data' do
-    before do
-      @test_user = {
-        username: 'test_user',
-        email: 'test',
-        password: '123123123'
-      }
-    end
-
     it 'should redirect to register' do
-      post '/register', @test_user
+      post '/register', invalid_user_email
       expect(last_request.path).to eq('/register')
     end
   end
 
   context 'when passed already existing email' do
-    before do
-      @user = {
-        username: 'test_user',
-        email: 'test@gmail.com',
-        password: '123123123'
-      }
-      post '/register', @user
-    end
     it 'should redirect back to register with a flash message' do
-      post '/register', @user
+      post '/register', stored_user
       follow_redirect!
-      expect(last_response.body).to include('Email Already taken!')
+      expect(last_response.body).to include('provide a valid email!')
     end
   end
 
   context 'when passed already existing username' do
-    before do
-      @initial_user = {
-        username: 'test_user',
-        email: 'test@gmail.com',
-        password: '123123123'
-      }
-
-      @current_user = {
-        username: 'test_user',
-        email: 'test1@gmail.com',
-        password: '123123123'
-      }
-      post '/register', @initial_user
-    end
     it 'should redirect back to register with a flash message' do
-      post '/register', @current_user
+      post '/register', existing_username
       follow_redirect!
-      expect(last_response.body).to include('Username already taken!')
+      expect(last_response.body).to include('has already been taken')
     end
   end
 end

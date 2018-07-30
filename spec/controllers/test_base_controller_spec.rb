@@ -4,17 +4,15 @@ require_relative '../spec_helper.rb'
 
 describe 'Micro Learning Application' do
   context 'When user tries to access landing page' do
-    it 'should access successfully' do
+    before do
       get '/'
+    end
+    it 'should access successfully' do
       expect(last_response).to be_ok
     end
-  end
 
-  context 'When user tries to dashboard' do
-    it 'should redirect to login' do
-      get '/dashboard'
-      expect(last_response).to be_redirect
-      follow_redirect!
+    it 'should include landing page content' do
+      expect(last_response.body).to include('Do not get left behind.')
     end
   end
 end

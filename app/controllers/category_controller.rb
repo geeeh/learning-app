@@ -1,45 +1,43 @@
 # frozen_string_literal: true
 
 require 'sinatra'
-require './app/models/category.rb'
-require './app/models/user.rb'
+
+require './app/models/category'
+require './app/models/user'
+require './app/middleware/authenticator'
 
 # SubjectController class.
 class App < Sinatra::Application
-  get_categories = lambda do
-    unless session[:id]
-      flash[:notice] = 'please login!'
-      redirect '/login'
-    end
-    @categories = Subject.all
-    @user = User.find_by(id: session[:id])
-    @user_categories = @user.subjects.all
+  before ['/categories', '/addcategories', '/categories/*'] do
+    authenticate
+  end
 
+  get '/categories' do
+    @categories = Category.all
+    @user_categories = @user.categories
     haml :categories
   end
 
-  add_categories_page = lambda do
+  get '/addcategories' do
     haml :addcategory
   end
 
-  add_categories = lambda do
-    @user = User.find_by(id: session[:id])
-    p params
+  post '/categories/add' do
     params['choice'].each do |item|
-      user_categories = @user.subjects.find_by(id: item)
+      user_categories = @user.categories.find_by(id: item)
       if user_categories
         flash[:notice] = 'you already have this category'
         redirect '/categories'
       end
-      category = Subject.find_by(id: item)
-      @user.subjects << category
+      category = Category.find_by(id: item)
+      @user.categories << category
       @user.save
     end
     redirect '/categories'
   end
 
-  create_subject = lambda do
-    @category = Subject.create(name: params['name'], description: params['description'])
+  post '/categories' do
+    @category = Category.create(name: params['name'], description: params['description'])
     unless @category.errors.messages.empty?
       flash[:notice] = 'this category already exists!'
       redirect '/addcategories'
@@ -47,14 +45,15 @@ class App < Sinatra::Application
     redirect '/categories'
   end
 
-  delete_subject = lambda do
-    @subject = Subject.find_by(id: params[:id])
-    @subject.delete
-  end
+  # delete '/categories/:id' do
+  #   @subject = Category.find_by(id: params[:id])
+  #   @subject.delete
+  #   redirect '/categories'
+  # end
 
-  get '/categories', &get_categories
-  get '/addcategories', &add_categories_page
-  post '/categories', &create_subject
-  post '/categories/add', &add_categories
-  delete '/categories/:id', &delete_subject
+  delete '/categories/:id' do
+    category = @user.categories.find_by_id(params[:id])
+    @user.categories.delete(category) if category
+    redirect '/categories'
+  end
 end

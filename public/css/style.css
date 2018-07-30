@@ -87,6 +87,11 @@ p, .more-info, a, h1, h2, h3, h4, h5, h6, button {
     font-family: 'Galada', cursive;
 }
 
+.login-space form .invalid-feedback {
+    width: 200% !important;
+}
+
+
 .login-space .google-login{
     margin: 40px 100px;
     text-align: center;
@@ -137,10 +142,6 @@ p, .more-info, a, h1, h2, h3, h4, h5, h6, button {
 
 .sign-in-space {
     padding: 20px;
-}
-
-.sign-up-space .reg_head {
-    margin-bottom: 80px !important;
 }
 
 .sidebar {
@@ -303,9 +304,54 @@ p, .more-info, a, h1, h2, h3, h4, h5, h6, button {
     display: inline;
 }
 .categories .hiddenCB .category-item {
-    max-width: 150px;
+    max-width: 200px;
+    min-width: 160px;
     margin: 20px;
-    padding: 10px 50px;
+    padding: 10px 30px;
+    border-radius: 4px;
     background: #F5F5F5;
-    /* box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1); */
+}
+
+.categories .hiddenCB .category-item .delete-button {
+    float: right;
+    margin-top: -30px;
+    background: transparent !important;
+    border: 0 !important;
+    opacity: 0.6;
+}
+
+.categories .hiddenCB .category-item .delete-button:hover {
+    float: right;
+    margin-top: -30px;
+    background: transparent !important;
+    border: 0 !important;
+    opacity: 1;
+}
+
+.category-list {
+    position: fixed;
+    float: right;
+    right: 0;
+    width: 20%;
+    height: auto;
+    margin: 135px 150px;
+    border: solid 1px #ccc;
+    border-width: 0 0 0 1px;
+}
+
+.category-list-items ul {
+    list-style-type: none;
+    text-decoration: none;
+    text-align: left;
+    margin-right: 20px
+}
+
+.category-list-items h5 {
+    margin: 20px;
+}
+
+.category-list-items ul li {
+    padding: 7px 15px;
+    background: #F5F5F5;
+    margin: 10px 0;
 }

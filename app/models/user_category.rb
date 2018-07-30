@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UserSubject < ActiveRecord::Base
+class UserCategory < ActiveRecord::Base
   belongs_to :user
-  belongs_to :subject
+  belongs_to :category
 end
