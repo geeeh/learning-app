@@ -25,4 +25,5 @@ group :test do
   gem 'database_cleaner'
   gem 'simplecov'
   gem 'coveralls'
+  gem 'factory_bot'
 end
