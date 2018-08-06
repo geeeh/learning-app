@@ -2,7 +2,7 @@
 
 require_relative '../spec_helper.rb'
 
-describe 'Micro Learning Application' do
+describe 'CategoryController', type: :controller do
   let!(:login_details) do
     {
       email: 'admin@gmail.com',

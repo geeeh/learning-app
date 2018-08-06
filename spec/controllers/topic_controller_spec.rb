@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require_relative '../spec_helper.rb'
 
-describe 'Micro Learning Application' do
+describe 'TopicController', type: :controller do
   let!(:test_user) do
     {
       email: 'admin@gmail.com',

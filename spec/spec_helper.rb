@@ -8,6 +8,8 @@ require 'sinatra'
 require './app/controllers/base_controller.rb'
 require 'simplecov'
 require 'coveralls'
+require 'factory_bot'
+require 'shoulda/matchers'
 
 Coveralls.wear!
 SimpleCov.formatter = Coveralls::SimpleCov::Formatter
@@ -25,10 +27,14 @@ end
 
 RSpec.configure do |config|
   config.include RSpecMixin
+  config.include FactoryBot::Syntax::Methods
+  config.include(Shoulda::Matchers::ActiveModel, type: :model)
+  config.include(Shoulda::Matchers::ActiveRecord, type: :model)
 
   config.before :suite do
     DatabaseCleaner.clean_with :truncation
     load './db/seeds.rb'
+    FactoryBot.find_definitions
   end
 
   config.before :each do

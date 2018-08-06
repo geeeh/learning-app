@@ -2,23 +2,20 @@
 
 require_relative '../spec_helper.rb'
 require './app/models/user'
+require './app/models/user_category'
 
-describe User do
-  let!(:invalid_user) do
-    User.new
-  end
+RSpec.describe User, type: :model do
+  it { is_expected.to have_many(:categories) }
+  it { is_expected.to validate_presence_of :username }
 
-  let!(:valid_user) do
-    User.new(username: 'test_name', email: 'test_name@gmail.com', password: '123123123')
-  end
-  context 'with a valid user' do
-    it 'should validate presence of email' do
-      expect(invalid_user).to be_invalid
-    end
-  end
-  context 'with a valid user' do
-    it 'should create user successfully' do
-      expect(valid_user).to be_valid
-    end
-  end
+  it { should validate_presence_of :password }
+  it { should have_secure_password }
+  it { should validate_confirmation_of :password }
+  it { should validate_length_of(:password).is_at_least(8) }
+
+  it { should validate_presence_of :email }
+  it { should validate_uniqueness_of :email }
+
+  it { should have_db_column :password_digest }
+  it { should have_db_column :email }
 end

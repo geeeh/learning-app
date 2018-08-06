@@ -7,10 +7,24 @@ class User < ActiveRecord::Base
   has_many :user_categories, class_name: 'UserCategory'
   has_many :categories, through: :user_categories
 
-  validates :username, length: {
-    maximum: 35,
-    too_long: 'must have at most %{count} letters'
-  }, uniqueness: true
+  VALID_USERNAME = /\A[^\d]+\z/
+  VALID_EMAIL = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+
+  validates :username,
+            uniqueness: true,
+            presence: true,
+            format: { with: VALID_USERNAME },
+            length: { minimum: 2 }
+
+  validates :email,
+            format: { with: VALID_EMAIL },
+            presence: true,
+            uniqueness: true
+
+  validates :password, length: {
+    minimum: 8,
+    confirmation: true
+  }
 
   has_secure_password
 
