@@ -26,4 +26,5 @@ group :test do
   gem 'simplecov'
   gem 'coveralls'
   gem 'factory_bot'
+  gem 'shoulda-matchers'
 end

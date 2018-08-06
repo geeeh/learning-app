@@ -2,7 +2,7 @@
 
 require_relative '../spec_helper.rb'
 
-describe 'Micro Learning Application' do
+describe 'BaseController', type: :controller do
   context 'When user tries to access landing page' do
     before do
       get '/'

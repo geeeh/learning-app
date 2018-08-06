@@ -2,7 +2,7 @@
 
 require_relative '../spec_helper.rb'
 
-describe 'Micro Learning Application' do
+describe 'AuthController', type: :controller do
   let!(:test_user) do
     { username: 'test',
       email: 'test.user@gmail.com',
