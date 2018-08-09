@@ -8,7 +8,8 @@ class Category < ActiveRecord::Base
   has_many :users, through: :user_categories
 
   validates :name, :description, length: {
-    maximum: 255
+    maximum: 255,
+    minimum: 2
   }, presence: true
   validates :name, uniqueness: true
 end

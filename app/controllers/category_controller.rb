@@ -45,12 +45,6 @@ class App < Sinatra::Application
     redirect '/categories'
   end
 
-  # delete '/categories/:id' do
-  #   @subject = Category.find_by(id: params[:id])
-  #   @subject.delete
-  #   redirect '/categories'
-  # end
-
   delete '/categories/:id' do
     category = @user.categories.find_by_id(params[:id])
     @user.categories.delete(category) if category
